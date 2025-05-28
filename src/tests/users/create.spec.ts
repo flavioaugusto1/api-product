@@ -43,7 +43,7 @@ describe('Users use case', () => {
       password: '123456',
     })
 
-    expect(async () => {
+    await expect(async () => {
       await sut.execute({
         name: 'Test',
         email: 'test@email.com',

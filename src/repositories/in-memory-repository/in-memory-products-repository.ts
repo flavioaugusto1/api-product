@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto'
 export class InMemoryProductsRepository implements ProductsRepository {
   private products: Product[] = []
 
-  async create(data: Prisma.ProductCreateInput): Promise<Product> {
+  async create(data: Prisma.ProductCreateInput) {
     const product = {
       id: data.id ?? randomUUID(),
       name: data.name,
@@ -17,5 +17,17 @@ export class InMemoryProductsRepository implements ProductsRepository {
     this.products.push(product)
 
     return product
+  }
+
+  async searchProducts(query: string, page: number) {
+    const products = this.products
+      .filter((product) => product.name.includes(query))
+      .slice((page - 1) * 10, page * 10)
+
+    return products
+  }
+
+  async fetchProducts() {
+    return this.products
   }
 }
