@@ -1,0 +1,21 @@
+import { Prisma, Product } from '@prisma/client'
+import { ProductsRepository } from '../products-repository'
+import { randomUUID } from 'node:crypto'
+
+export class InMemoryProductsRepository implements ProductsRepository {
+  private products: Product[] = []
+
+  async create(data: Prisma.ProductCreateInput): Promise<Product> {
+    const product = {
+      id: data.id ?? randomUUID(),
+      name: data.name,
+      description: data.description,
+      price: new Prisma.Decimal(data.price.toString()),
+      stock: data.stock,
+    }
+
+    this.products.push(product)
+
+    return product
+  }
+}
