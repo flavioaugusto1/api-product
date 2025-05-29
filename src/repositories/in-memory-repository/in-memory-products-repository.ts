@@ -30,4 +30,18 @@ export class InMemoryProductsRepository implements ProductsRepository {
   async fetchProducts() {
     return this.products
   }
+
+  async getProductById(id: string) {
+    const product = this.products.find((item) => item.id === id)
+
+    if (!product) {
+      return null
+    }
+
+    return product
+  }
+
+  // update(data: Prisma.ProductCreateInput): Promise<void> {
+  //   throw new Error('Method not implemented.')
+  // }
 }
