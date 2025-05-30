@@ -42,10 +42,26 @@ export class InMemoryProductsRepository implements ProductsRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.products.filter((product) => product.id !== id)
+    this.products = await this.products.filter((product) => product.id !== id)
   }
 
-  // update(data: Prisma.ProductCreateInput): Promise<void> {
-  //   throw new Error('Method not implemented.')
-  // }
+  async update(data: Prisma.ProductCreateInput) {
+    const findIndexProduct = await this.products.findIndex(
+      (product) => product.id === data.id,
+    )
+
+    const product = this.products[findIndexProduct]
+
+    const updatedProduct = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      stock: product.stock,
+    }
+
+    this.products[findIndexProduct] = updatedProduct
+
+    return updatedProduct
+  }
 }
