@@ -1,5 +1,7 @@
-export class InvalidCredentialsError extends Error {
+import { AppError } from './app-error'
+
+export class InvalidCredentialsError extends AppError {
   constructor() {
-    super('E-mail e/ou senha inválido!')
+    super(401, 'E-mail e/ou senha inválidos')
   }
 }

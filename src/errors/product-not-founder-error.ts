@@ -1,5 +1,7 @@
-export class ProductNotFounderError extends Error {
+import { AppError } from './app-error'
+
+export class ProductNotFounderError extends AppError {
   constructor() {
-    super('O produto não foi encontrado!')
+    super(404, 'O produto não foi encontrado!')
   }
 }
