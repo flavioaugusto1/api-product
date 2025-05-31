@@ -1,4 +1,3 @@
-import { Decimal } from '@prisma/client/runtime/library'
 import { ProductsRepository } from '../../repositories/products-repository'
 import { ProductNotFounderError } from '../../errors/product-not-founder-error'
 import { Product } from '@prisma/client'
@@ -6,7 +5,7 @@ import { Product } from '@prisma/client'
 interface UpdateProductsUseCaseRequest {
   id: string
   name?: string
-  price?: Decimal
+  price?: number
   description?: string
   stock?: number
 }
