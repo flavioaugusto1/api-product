@@ -9,7 +9,7 @@ export async function fetchProdcuts(
   const productsRepository = new PrismaProductsRepository()
   const fetchProductsUseCase = new FetchProductsUseCase(productsRepository)
 
-  const products = fetchProductsUseCase.execute()
+  const { products } = await fetchProductsUseCase.execute()
 
-  return response.status(200).send({ products })
+  return response.status(200).send({ products, total: products.length })
 }
