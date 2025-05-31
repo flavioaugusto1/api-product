@@ -1,9 +1,9 @@
 import { ProductsRepository } from '../../repositories/products-repository'
-import { Prisma, Product } from '@prisma/client'
+import { Product } from '@prisma/client'
 
 interface CreateProductsUseCaseRequest {
   name: string
-  price: Prisma.Decimal
+  price: number
   description: string
   stock: number
 }
