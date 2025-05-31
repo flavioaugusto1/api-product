@@ -23,8 +23,8 @@ export class PrismaProductsRepository implements ProductsRepository {
     throw new Error('Method not implemented.')
   }
 
-  fetchProducts(): Promise<Product[]> {
-    throw new Error('Method not implemented.')
+  async fetchProducts(): Promise<Product[]> {
+    return await prisma.product.findMany()
   }
 
   async getProductById(id: string): Promise<Product | null> {
