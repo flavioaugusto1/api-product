@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { PrismaProductsRepository } from '../../../repositories/prisma-repository/prisma-products-repository'
 import { CreateProductsUseCase } from '../../../use-cases/products/create-products-use-case'
 
-export function createProductsController(
+export async function createProductsController(
   request: FastifyRequest,
   response: FastifyReply,
 ) {
@@ -21,7 +21,12 @@ export function createProductsController(
   const productsRepository = new PrismaProductsRepository()
   const productsUseCase = new CreateProductsUseCase(productsRepository)
 
-  const product = productsUseCase.execute({ name, description, price, stock })
+  const { product } = await productsUseCase.execute({
+    name,
+    description,
+    price,
+    stock,
+  })
 
   return response.status(201).send({ product })
 }

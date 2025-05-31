@@ -16,7 +16,7 @@ export async function getProductByIdController(
   const productsRepository = new PrismaProductsRepository()
   const getProductByIdUseCase = new GetProductByIdUseCase(productsRepository)
 
-  const product = getProductByIdUseCase.execute({ id })
+  const { product } = await getProductByIdUseCase.execute({ id })
 
   return response.status(200).send({ product })
 }
